@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>Upload Thumbnail</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- <link rel="stylesheet" type="text/css" media="all" th:href="@{/assets/css/style.css}" /> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+  <body class="bg-light">
+  	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  		<div class="container">
+    		<a class="navbar-brand">Upload Thumbnail</a>
+    		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      			<span class="navbar-toggler-icon"></span>
+    		</button>
+  		</div>
+	</nav>
+    <div class="p-5 mb-4 rounded-3">
+      <div class="container py-5">
+      	<form action="/tools/thumby" method="get">
+	  		<div class="row align-middle">
+				<div class="col-md-5">
+		    		<label for="url">URL</label>
+		    		<input type="url" name="url" class="form-control" size="50" id="url">
+		   		</div>
+				<div class="col-md-3">
+					<label for="size">Größe (in Pixel)</label>
+				    <input type="text" name="size" class="form-control" size="50" id="size">
+				</div>
+				<div class="col-md-3">
+					<label for="refresh">Cache leeren</label>
+				    <select class="form-select" name="refresh" aria-label="Cache leeren">
+  						<option selected></option>
+					    <option value="1">Ja</option>
+					    <option value="0">Nein</option>
+					</select>
+				</div>
+			</div>
+			<div class="row align-middle mt-5">
+			  	<div class="col-md-5 ml-auto">
+		  			<button class="btn btn-primary btn-md" type="submit">Generate Thumbnail</button>
+		  			<button class="btn btn-secondary btn-md" type="reset" style="margin-left:20px !important;">Reset</button>
+		  		</div>
+		  	</div>
+     	</form>
+        
+      </div>
+    </div>
+  
+  </body>
+
+</html>
