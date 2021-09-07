@@ -7,7 +7,7 @@ It supports pdfs and image files.
 # Requirements
 
  1. Java 11
- 2. Maven
+ 2. Maven Build Tool
 
 # Getting Started
 
