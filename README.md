@@ -14,9 +14,14 @@ It supports pdfs and image files.
 ## Download
 
 #### With Console
-    cd /tmp (select desired directory)
+    # Select desired location
+    cd /myPath
+    
+    # Thumby will be downloaded
     git clone https://github.com/hbz/to.science.thumbs.git
-    cd to/science/thumbs
+    
+    # Go to thumby directory
+    cd to.science.thumbs
 
 #### With Eclipse IDE
 
@@ -47,7 +52,10 @@ The thumby -> src -> main -> resources -> application.properties file provide th
 
 #### With Console/Maven
 
-    cd to/science/thumbs (navigate to project root directory)
+    # Navigate to project root directory
+    cd to.science.thumbs/thumby
+    
+    # Start thumby
     mvn spring-boot:run
 
 #### With Eclipse IDE
@@ -55,7 +63,7 @@ The thumby -> src -> main -> resources -> application.properties file provide th
     Right Click on thumby project -> Run as -> Java application
 
 
-Then go to http://localhost:9001/tools/thumby (or the port you defined)
+Then go to http://localhost:9001/tools/thumby (or the port you defined above)
 
 ### Test
 Fill in the url of the desired Resource to generate a thumbnail, the size and if the cache should be first cleaned up. 
