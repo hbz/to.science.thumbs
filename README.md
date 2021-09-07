@@ -17,10 +17,10 @@ It supports pdfs and image files.
     # Select desired location
     cd /myPath
     
-    # Thumby will be downloaded
+    # Download thumby
     git clone https://github.com/hbz/to.science.thumbs.git
     
-    # Go to thumby directory
+    # Go to project directory
     cd to.science.thumbs
 
 #### With Eclipse IDE
@@ -37,8 +37,8 @@ or
 The thumby -> src -> main -> resources -> application.properties file provide the possibility to configure the following settings:
 
     
-    # Specify a port
-    server.port=9001 (default port)
+    # Specify a port (default port is 9001)
+    server.port=9001
     
     # Provide a list of servers, that thumby is allowed to connect to.
     thumby.whitelist=localhost,127.0.0.1,pbs.twimg.com
