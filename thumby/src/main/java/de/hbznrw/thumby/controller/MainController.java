@@ -88,7 +88,7 @@ public class MainController {
 			
 			} catch(IOException e) 
 			{
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.toString());
+				return ResponseEntity.internalServerError().body(e.toString());
 			}			
 			
 		});
