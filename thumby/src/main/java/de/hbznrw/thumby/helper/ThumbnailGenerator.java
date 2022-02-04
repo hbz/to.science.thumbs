@@ -67,12 +67,10 @@ public class ThumbnailGenerator {
      * @throws IOException 
      */
     
-    public File createThumbnail(InputStream ts, MediaType contentType, int size, String name) throws IOException 
-    {
+    public File createThumbnail(InputStream ts, MediaType contentType, int size, String name) throws IOException {
         File result = null;
-        try 
-        {
-            if (contentType.is(MediaType.JPEG))
+        try {
+        	if (contentType.is(MediaType.JPEG))
                 result = this.generateThumbnailFromImage(ts, size, "jpeg", name);    
             else if (contentType.is(MediaType.PNG))
                 result = this.generateThumbnailFromImage(ts, size, "png", name);
@@ -82,16 +80,14 @@ public class ThumbnailGenerator {
                 result = this.generateThumbnailFromPdf(ts, size, name);       
             else
                 result = this.generateMimeTypeImage(contentType, size, name);
-        } catch (Throwable e) 
-        {
+        } catch (Throwable e) {
             log.warn("", e);
             result = this.generateThumbnailFromImage(conf.getPathToDefaultPic().getInputStream(), size, "png",name);
         }
         return result;
     }
 
-    private File generateMimeTypeImage(MediaType contentType, int size,String name) throws IOException 
-    	{
+    private File generateMimeTypeImage(MediaType contentType, int size,String name) throws IOException {
         File result = null;
         try {
             if (contentType.is(MediaType.ANY_AUDIO_TYPE))
@@ -108,8 +104,7 @@ public class ThumbnailGenerator {
                 result = this.generateThumbnailFromImage(conf.getPathToPdfPic().getInputStream(), size, "png", name);
             else
                 result = this.generateThumbnailFromImage(conf.getPathToDefaultPic().getInputStream(), size, "png", name);
-        } catch (Throwable e) 
-        {
+        } catch (Throwable e) {
             log.warn("", e);
             result = this.generateThumbnailFromImage(conf.getPathToDefaultPic().getInputStream(), size, "png",name);
         }
@@ -117,34 +112,26 @@ public class ThumbnailGenerator {
     }
     
 
-    private File generateThumbnailFromPdf(InputStream in, int size, String name) 
-    {
+    private File generateThumbnailFromPdf(InputStream in, int size, String name) {
         PDDocument document = null;
-        try 
-        {
+        try {
             document = Loader.loadPDF(in);
             BufferedImage tmpImage = writeImageFirstPage(document,ImageType.RGB, size);
             return createFileFromImage(tmpImage, size, name);
-        } catch (Exception e) 
-        {
+        } catch (Exception e) {
             throw new RuntimeException(e);
-        } finally 
-        {
-            if (document != null) 
-            {
-                try 
-                {
+        } finally {
+            if (document != null) {
+                try {
                     document.close();
-                } catch (IOException e) 
-                {
+                } catch (IOException e) {
                 	e.printStackTrace();
                 }
             }
         }
     }
     
-    private BufferedImage writeImageFirstPage(PDDocument document, ImageType imageType, int size) throws IOException 
-    {
+    private BufferedImage writeImageFirstPage(PDDocument document, ImageType imageType, int size) throws IOException {
     	PDFRenderer pdfRenderer = new PDFRenderer(document);
     	PDDocumentCatalog dc = document.getDocumentCatalog();
         dc.setPageMode(PageMode.USE_THUMBS);
@@ -154,8 +141,7 @@ public class ThumbnailGenerator {
     }
     
 
-    private File createFileFromImage(BufferedImage tmpImage, int size,String name) 
-    {
+    private File createFileFromImage(BufferedImage tmpImage, int size,String name) {
         try (ByteArrayOutputStream os = new ByteArrayOutputStream()) {
             ImageIO.write(tmpImage, "jpeg", os);
             if (tmpImage.getWidth() != size)
@@ -163,35 +149,28 @@ public class ThumbnailGenerator {
             File outFile = File.createTempFile("data", "pdf");
             Files.write(os.toByteArray(), outFile);
             return outFile;
-        } catch (Exception e) 
-        {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    private File createThumbnail(BufferedImage tmpImage, ByteArrayOutputStream os, int size,String name) 
-    {
-        try (InputStream is = new ByteArrayInputStream(os.toByteArray())) 
-        {
+    private File createThumbnail(BufferedImage tmpImage, ByteArrayOutputStream os, int size,String name) {
+        try (InputStream is = new ByteArrayInputStream(os.toByteArray())) {
             return this.generateThumbnailFromImage(is, size, "jpeg",name);
-        } catch (Exception e) 
-        {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
 
-    private File generateThumbnailFromImage(InputStream ts, int size, String imageType, String name) 
-    {
+    private File generateThumbnailFromImage(InputStream ts, int size, String imageType, String name) {
         File output;
-        try 
-        {
+        try {
             output = File.createTempFile(name+"-thumby","test");
             BufferedImage img = ImageIO.read(ts);
             BufferedImage thumbnail = Scalr.resize(img, size);
             ImageIO.write(thumbnail, imageType, output);
-        } catch (IOException e) 
-        {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
         return output;

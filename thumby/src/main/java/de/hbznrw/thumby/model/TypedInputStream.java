@@ -22,8 +22,7 @@ import java.io.InputStream;
 /**
  * @author Jan Schnasse & Alessio Pellerito
  */
-public class TypedInputStream 
-{
+public class TypedInputStream {
 	private InputStream in;
 	private String type;
 	

@@ -52,17 +52,14 @@ public class URLUtil {
      * harm to encode the URL. There will be no 'double encoding issue'
      * 
      */
-    public URL saveEncode(URL url) 
-    {
-        try 
-        {
+    public URL saveEncode(URL url) {
+        try {
             String passedUrl = url.toExternalForm().replaceAll("\\+", "%20");
             String decodeUrl = decode(passedUrl);
             if (passedUrl.equals(decodeUrl))
                 return new URL(encode(passedUrl));
             return url;
-        } catch (Exception e) 
-        {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -79,16 +76,13 @@ public class URLUtil {
             				  u.getRef() );
             String correctEncodedURL = uri.toASCIIString();
             return correctEncodedURL;
-        } catch (Exception e) 
-        {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    public String decode(String url) 
-    {
-        try 
-        {
+    public String decode(String url) {
+        try {
             URL u = new URL(url);
             String protocol = u.getProtocol();
             String userInfo = u.getUserInfo();
@@ -107,20 +101,17 @@ public class URLUtil {
             ref = ref != null ? "#" + ref : "";
 
             return String.format("%s%s%s%s%s%s%s", protocol, userInfo, host, portStr, path, ref, query);
-        } catch (Exception e) 
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
 
-    public TypedInputStream urlToInputStream(URL url) 
-    {
+    public TypedInputStream urlToInputStream(URL url) {
         URL encodedUrl = saveEncode(url);
         HttpURLConnection con = null;
         TypedInputStream ts = new TypedInputStream();
-        try 
-        {
+        try {
             con = (HttpURLConnection) encodedUrl.openConnection();
             con.setInstanceFollowRedirects(false);
             con.connect();
@@ -130,13 +121,11 @@ public class URLUtil {
             if (responseCode == HttpURLConnection.HTTP_MOVED_PERM || responseCode == HttpURLConnection.HTTP_MOVED_TEMP
                     || responseCode == 307 || responseCode == 303) {
                 String redirectUrl = con.getHeaderField("Location");
-                try 
-                {
+                try {
                     URL newUrl = new URL(redirectUrl);
                     log.info("Redirect to Location: " + newUrl);
                     return urlToInputStream(newUrl);
-                } catch (MalformedURLException e) 
-                {
+                } catch (MalformedURLException e) {
                     URL newUrl = new URL(encodedUrl.getProtocol() + "://" + encodedUrl.getHost() + redirectUrl);
                     log.info("Redirect to Location: " + newUrl);
                     return urlToInputStream(newUrl);
@@ -144,8 +133,7 @@ public class URLUtil {
             }
             ts.setIn(con.getInputStream());
             return ts;
-        } catch (IOException e) 
-        {
+        } catch (IOException e) {
             log.info("", e);
             throw new RuntimeException(e);
         }

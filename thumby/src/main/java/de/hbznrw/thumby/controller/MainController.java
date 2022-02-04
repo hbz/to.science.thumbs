@@ -18,12 +18,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package de.hbznrw.thumby.controller;
 
 import java.io.File;
-import static java.lang.ClassLoader.getSystemResourceAsStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Supplier;
 import java.nio.file.Files;
 
 import org.slf4j.Logger;
@@ -34,7 +31,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import de.hbznrw.thumby.model.Storage;
 import de.hbznrw.thumby.service.ThumbyService;
@@ -43,7 +39,6 @@ import de.hbznrw.thumby.service.ThumbyService;
  * @author Jan Schnasse & Alessio Pellerito
  */
 @Controller
-@RequestMapping("/tools/thumby")
 public class MainController {
 	
 	private static final Logger log = LoggerFactory.getLogger(MainController.class);
@@ -54,40 +49,36 @@ public class MainController {
 	@Autowired
 	private ThumbyService service;
 	
-	@GetMapping(value="",produces = {MediaType.IMAGE_JPEG_VALUE,MediaType.TEXT_HTML_VALUE})
-	public CompletableFuture<ResponseEntity<?>> getThumbnail( @RequestParam(required=false) String url, 
+	@GetMapping(value="/",produces = {MediaType.IMAGE_JPEG_VALUE,MediaType.TEXT_HTML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+	public CompletableFuture<Object> getThumbnail( @RequestParam(required=false) String url, 
 											  @RequestParam(defaultValue="150") Integer size,
-											  @RequestParam(defaultValue="0") Integer refresh )
-	{
-		return CompletableFuture.supplyAsync( (Supplier<ResponseEntity<?>>) () -> 
-		{
-			try (InputStream upload = getSystemResourceAsStream("templates/upload.html");)
-			{	
-				if(url == null || url.isEmpty()) 
-				{ 
-					return ResponseEntity.ok(upload.readAllBytes());
+											  @RequestParam(defaultValue="0") Integer refresh ) {
+		return CompletableFuture.supplyAsync(  () -> {
+			try {	
+				if(url == null || url.isEmpty()) { 
+					return (String) "upload";
 				}
 				URL urlAdress = new URL(url);
-				if(!service.isWhitelisted(urlAdress.getHost()))
-				{
+				if(!service.isWhitelisted(urlAdress.getHost())) {
 					log.info("URLHost: " + urlAdress.getHost());
-					return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Thumby is not allowed to access this url!");
+					return ResponseEntity.status(HttpStatus.FORBIDDEN)
+										 .contentType(MediaType.APPLICATION_JSON)
+										 .body("Thumby is not allowed to access this url!");
 				}
 				File result = (File) storage.get(urlAdress.toString() + size);
-				if(refresh == 1) 
-				{
+				if(refresh == 1) {
 					result.delete();
 					result = null;
 				}
-				if(result == null)
-				{	
+				if(result == null) {	
 					result = service.uploadUrl(urlAdress, size);
 					storage.set(urlAdress.toString() + size, result);
 				}	
-				return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(Files.readAllBytes(result.toPath()));
+				return ResponseEntity.status(HttpStatus.OK)
+						             .contentType(MediaType.IMAGE_JPEG)
+						             .body(Files.readAllBytes(result.toPath()));
 			
-			} catch(IOException e) 
-			{
+			} catch(IOException e) {
 				return ResponseEntity.internalServerError().body(e.toString());
 			}			
 			

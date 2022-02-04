@@ -36,7 +36,7 @@ public class MainControllerIntegrationTest {
 	void testStartPageView() throws Exception {
 		
 	        this.mockMvc.perform(
-	        		get("/tools/thumby").contentType(MediaType.TEXT_HTML).content("upload"))
+	        		get("/").contentType(MediaType.TEXT_HTML).content("upload"))
 	          			.andExpect(status().isOk());
 	}
 }

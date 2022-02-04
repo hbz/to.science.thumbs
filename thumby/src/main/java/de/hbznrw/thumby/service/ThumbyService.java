@@ -51,16 +51,13 @@ public class ThumbyService {
 	private ThumbnailGenerator generator;
 	
 	
-	public boolean isWhitelisted(String host) 
-	{
+	public boolean isWhitelisted(String host) {
 		return conf.getWhiteList().stream().anyMatch(element -> element.equals(host));
     }
 
-    public File uploadUrl(URL url, int size) 
-    {
+    public File uploadUrl(URL url, int size) {
         TypedInputStream ts = null;
-        try 
-        {
+        try {
             File thumbnail = this.createThumbnail( conf.getPathToDefaultPic().getInputStream(), 
             									   MediaType.PNG, size, url.toString() );
             ts = urlUtil.urlToInputStream(url);
@@ -69,25 +66,20 @@ public class ThumbyService {
             								  size, 
             								  url.toString() );
             return thumbnail;
-        } catch (Exception e) 
-        {
+        } catch (Exception e) {
             throw new RuntimeException(e);
-        } finally 
-        {
-            try 
-            {
+        } finally {
+            try {
                 if (ts != null && ts.getIn() != null) 
                     ts.getIn().close();
-            } catch (Exception e) 
-            {
+            } catch (Exception e) {
                 log.error("Problems to close connection! Maybe restart application "
                 		+ "to prevent too many open connections.\nCaused when accessing: " + url);
             }
         }
     }
 
-    public File createThumbnail(InputStream ts, MediaType contentType, int size, String name) throws IOException 
-    {
+    public File createThumbnail(InputStream ts, MediaType contentType, int size, String name) throws IOException {
         log.info("Content-Type: " + contentType);
         File out = generator.createThumbnail(ts, contentType, size, name);
         if (out == null)

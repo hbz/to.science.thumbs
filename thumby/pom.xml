@@ -37,6 +37,7 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<!-- Dependency added for deploying in other server END-->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -75,11 +76,34 @@
     		<artifactId>imgscalr-lib</artifactId>
     		<version>4.2</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
+		
+		<!-- For Bootstrap integration-->
+		<dependency>
+	    	<groupId>org.webjars</groupId>
+	    	<artifactId>bootstrap</artifactId>
+	    	<version>5.1.3</version>
+		</dependency>
+		
+		<!-- Bootstrap Version Administration -->
+		<dependency>
+		    <groupId>org.webjars</groupId>
+		    <artifactId>webjars-locator</artifactId>
+		    <version>0.42</version>
+		</dependency>
+		
+		<!-- For jQuery integration -->
+		<dependency>
+		    <groupId>org.webjars</groupId>
+		    <artifactId>jquery</artifactId>
+		    <version>3.6.0</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>

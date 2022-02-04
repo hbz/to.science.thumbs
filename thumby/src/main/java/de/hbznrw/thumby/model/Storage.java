@@ -43,18 +43,15 @@ public class Storage {
 	private static final long partitions = 100;
 	
 	@Autowired
-	public Storage(ThumbyConfiguration conf) 
-	{
+	public Storage(ThumbyConfiguration conf) {
 		this.conf = conf;
 		log.info("Store content in: " + conf.getStorageLocation());
-        for(int i = 0; i <= partitions; i++)
-        {
+        for(int i = 0; i <= partitions; i++) {
             new File(conf.getStorageLocation() + File.separator + i).mkdirs(); 
         }
 	}
 	
-	public File get(String key) 
-	{
+	public File get(String key) {
 		File target = findTarget(key);
         log.info("SEARCH "+ target);
         if (target.exists())
@@ -62,29 +59,24 @@ public class Storage {
         return null;
 	}
 	
-	public void set(String key, File result) 
-	{
+	public void set(String key, File result) {
         File target = findTarget(key);
         log.info("CREATE "+ target);
-        try 
-        {
+        try {
             Files.copy(result, target);
-        } catch (IOException e) 
-        {
+        } catch (IOException e) {
             log.debug("",e);
             throw new RuntimeException("", e);
         }
     } 
 
-    private File findTarget(String key)
-    {
+    private File findTarget(String key) {
         String name = encode(key);
         String dirname = getDirName(name);
         return new File(conf.getStorageLocation() + File.separator + dirname + File.separator + name);
     }
 
-    private String getDirName(String name) 
-    {
+    private String getDirName(String name) {
         /* CRC32 checksum calculation */
         CRC32 crc = new CRC32();
         crc.update(name.getBytes());
@@ -94,8 +86,7 @@ public class Storage {
         return dirname;
     }
 
-    private String encode(String encodeMe)
-    {
+    private String encode(String encodeMe) {
         return Base64.getUrlEncoder().encodeToString(encodeMe.getBytes());
     }
     /*

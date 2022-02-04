@@ -20,6 +20,7 @@ package de.hbznrw.thumby.configuration;
 import java.util.List;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +28,7 @@ import org.springframework.stereotype.Component;
  * @author Jan Schnasse & Alessio Pellerito
  */
 @Component
+@PropertySource("file:/etc/thumby.properties")
 @ConfigurationProperties(prefix = "thumby")
 public class ThumbyConfiguration {
 	

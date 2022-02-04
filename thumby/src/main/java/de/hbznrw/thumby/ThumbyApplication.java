@@ -28,13 +28,13 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @SpringBootApplication
 public class ThumbyApplication extends SpringBootServletInitializer {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ThumbyApplication.class, args);
-	}
-
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return builder.sources(ThumbyApplication.class);
+	}
+	
+	public static void main(String[] args) {
+		SpringApplication.run(ThumbyApplication.class, args);
 	}
 
 }
