@@ -51,8 +51,8 @@ public class MainController {
 	
 	@GetMapping(value="/",produces = {MediaType.IMAGE_JPEG_VALUE,MediaType.TEXT_HTML_VALUE, MediaType.APPLICATION_JSON_VALUE})
 	public CompletableFuture<Object> getThumbnail( @RequestParam(required=false) String url, 
-											  @RequestParam(defaultValue="150") Integer size,
-											  @RequestParam(defaultValue="0") Integer refresh ) {
+											       @RequestParam(defaultValue="150") Integer size,
+											       @RequestParam(defaultValue="0") Integer refresh ) {
 		return CompletableFuture.supplyAsync(  () -> {
 			try {	
 				if(url == null || url.isEmpty()) { 
@@ -66,7 +66,7 @@ public class MainController {
 										 .body("Thumby is not allowed to access this url!");
 				}
 				File result = (File) storage.get(urlAdress.toString() + size);
-				if(refresh == 1) {
+				if(refresh == 1 && result != null) { 
 					result.delete();
 					result = null;
 				}
