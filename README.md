@@ -31,22 +31,24 @@ or
 
     Git Repositories -> Clone a Git Repository -> Enter https://github.com/hbz/to.science.thumbs.git
 
+## Configurations
 
-## Configure
-
-The thumby -> src -> main -> resources -> application.properties file provide the possibility to configure the following settings:
-
+#### For usage in development mode
     
-    # Specify a port (default port is 9001)
-    server.port=9001
+    To work with thumby in dev mode (localhost) you have to make sure that the embedded Tomcat Server in 
+    Spring is enabled and that the internal application.properties file inside the classpath is used. 
+    Follow these steps to realize this:
     
-    # Provide a list of servers, that thumby is allowed to connect to.
-    thumby.whitelist=localhost,127.0.0.1,pbs.twimg.com
+    1. Comment out <scope>provided</scope> in the pom.xml (line 40) to enable the embedded Tomcat Server
     
-    # Specify a location where thumby stores thumbnails
-    thumby.storageLocation=/tmp/thumby-storage
+    2. Comment out the annotation @PropertySource("file:/etc/thumby.properties") in class "ThumbyConfiguration"
+       (line 32), then automatically the internal application.properties file in src/java/resources will be used,
+       otherwise thumby will look for a thumby.properties file locally in /etc.
     
+#### For usage in production mode
     
+    After finishing in development mode and thumby is ready again for deploying on an external server, you have
+    to undo the steps 1. and 2. from above.
 
 ## Run
 
@@ -62,20 +64,24 @@ The thumby -> src -> main -> resources -> application.properties file provide th
 
     Right Click on thumby project -> Run as -> Java application
 
+Open in your preferred browser:
+http://localhost:8080/thumby (or the port you defined in internal application.properties file)
 
-Then go to http://localhost:9001/tools/thumby (or the port you defined above)
-
-### Test
+### Test thumby
 Fill in the url of the desired Resource to generate a thumbnail, the size and if the cache should be first cleaned up. 
 For example:
 
-    url       -->		https://repository.publisso.de/resource/frl:6414860
+    url       -->		https://mars.nasa.gov/system/resources/detail_files/26252_PIA24810---Mound-2D-web.jpg
     size      -->		200
-    refresh   -->		Ja	
+    refresh   -->		Ja
 
 
 That's all! Thumbnail will be generated.
 
+### Deploy to external Server
+
+    With the following maven command you can produce a thumby.war file in target folder:
+    mvn clean install
 
 ## License
 
