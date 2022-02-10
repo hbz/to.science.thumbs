@@ -22,22 +22,23 @@
 	</properties>
 	
 	<dependencies>
+	
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		
-		<!-- Dependency added for deploying in other server -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<!-- For development purposes: Comment out the next line to use the embedded Tomcat Server -->
 			<scope>provided</scope>
 		</dependency>
-		<!-- Dependency added for deploying in other server END-->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -45,32 +46,31 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>27.0.1-jre</version>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 		<dependency>
 		    <groupId>commons-io</groupId>
 		    <artifactId>commons-io</artifactId>
 		    <version>2.11.0</version>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
 		<dependency>
     		<groupId>org.apache.pdfbox</groupId>
     		<artifactId>pdfbox</artifactId>
     		<version>3.0.0-RC1</version>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/org.imgscalr/imgscalr-lib -->
 		<dependency>
     		<groupId>org.imgscalr</groupId>
     		<artifactId>imgscalr-lib</artifactId>
@@ -107,6 +107,7 @@
 	</dependencies>
 
 	<build>
+	    <!-- Name of the war file, currently it will produce thumby.war -->
 		<finalName>thumby</finalName>
 		<plugins>
 			<plugin>

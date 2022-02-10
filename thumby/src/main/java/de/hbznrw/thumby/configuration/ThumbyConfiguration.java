@@ -28,6 +28,7 @@ import org.springframework.stereotype.Component;
  * @author Jan Schnasse & Alessio Pellerito
  */
 @Component
+/* Remove next line in dev Mode to read from internal application.properties file in classpath */
 @PropertySource("file:/etc/thumby.properties")
 @ConfigurationProperties(prefix = "thumby")
 public class ThumbyConfiguration {
