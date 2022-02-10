@@ -35,20 +35,19 @@ or
 
 #### For usage in development mode
     
-    To work with thumby in dev mode (localhost) you have to make sure that the embedded Tomcat Server in 
-    Spring is enabled and that the internal application.properties file inside the classpath is used. 
-    Follow these steps to realize this:
+    To work with thumby in dev mode (localhost) you have to make sure that the embedded Tomcat Server in Spring is enabled 
+    and that the internal application.properties file inside the classpath is used. Follow these steps to realize this:
     
     1. Comment out <scope>provided</scope> in the pom.xml (line 40) to enable the embedded Tomcat Server
     
-    2. Comment out the annotation @PropertySource("file:/etc/thumby.properties") in class "ThumbyConfiguration"
-       (line 32), then automatically the internal application.properties file in src/java/resources will be used,
-       otherwise thumby will look for a thumby.properties file locally in /etc.
+    2. Comment out the annotation @PropertySource("file:/etc/thumby.properties") in class "ThumbyConfiguration" (line 32), 
+       then automatically the internal application.properties file in src/java/resources will be used, otherwise thumby 
+       will look for a thumby.properties file locally in /etc.
     
 #### For usage in production mode
     
-    After finishing in development mode and thumby is ready again for deploying on an external server, you have
-    to undo the steps 1. and 2. from above.
+    After finishing in development mode and thumby is ready again for deploying on an external server, you have to undo 
+    the steps 1. and 2. from above.
 
 ## Run
 
