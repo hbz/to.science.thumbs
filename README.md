@@ -31,24 +31,6 @@ or
 
     Git Repositories -> Clone a Git Repository -> Enter https://github.com/hbz/to.science.thumbs.git
 
-## Configurations
-
-#### For usage in development mode
-    
-    To work with thumby in dev mode (localhost) you have to make sure that the embedded Tomcat Server in Spring is enabled 
-    and that the internal application.properties file inside the classpath is used. Follow these steps to realize this:
-    
-    1. Comment out <scope>provided</scope> in the pom.xml (line 40) to enable the embedded Tomcat Server
-    
-    2. Comment out the annotation @PropertySource("file:/etc/thumby.properties") in class "ThumbyConfiguration" (line 32), 
-       then automatically the internal application.properties file in src/java/resources will be used, otherwise thumby 
-       will look for a thumby.properties file locally in /etc.
-    
-#### For usage in production mode
-    
-    After finishing in development mode and thumby is ready again for deploying on an external server, you have to undo 
-    the steps 1. and 2. from above.
-
 ## Run
 
 #### With Console/Maven
@@ -64,7 +46,7 @@ or
     Right Click on thumby project -> Run as -> Java application
 
 Open in your preferred browser:
-http://localhost:8080/thumby (or the port you defined in internal application.properties file)
+http://localhost:9001/thumby (port is currently set to 9001, could be changed in application.properties file)
 
 ### Test thumby
 Fill in the url of the desired Resource to generate a thumbnail, the size and if the cache should be first cleaned up. 
@@ -77,11 +59,17 @@ For example:
 
 That's all! Thumbnail will be generated.
 
-### Deploy to external Server
+### Create war file to deploy to external Tomcat Server
 
-    With the following maven command you can produce a thumby.war file in target folder:
+    # Change from default "development" profile to "production" profile in application.properties file
+    spring.profiles.active=production
+    
+    # Navigate to project root directory
+    cd to.science.thumby/thumby
+    
+    # Execute maven command to create thumby.war file in target folder:
     mvn clean install
-
+    
 ## License
 
 GNU AFFERO GENERAL PUBLIC LICENSE
