@@ -33,12 +33,13 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		
+		<!-- this dependency is only necessary to deploy as war on external tomcat server -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<!-- For development purposes: Comment out the next line to use the embedded Tomcat Server -->
 			<scope>provided</scope>
 		</dependency>
+		<!-- this dependency is only necessary to deploy as war on external tomcat server END-->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -83,6 +84,14 @@
 			<optional>true</optional>
 		</dependency>
 		
+		<!-- Reducing Boilerplate Code, through i.e. @Getter @Setter -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<!-- Reducing Boilerplate Code, through i.e. @Getter @Setter END -->
+		
 		<!-- For Bootstrap integration-->
 		<dependency>
 	    	<groupId>org.webjars</groupId>
@@ -113,6 +122,14 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

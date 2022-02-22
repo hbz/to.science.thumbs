@@ -21,28 +21,26 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.net.MediaType;
 
-import de.hbznrw.thumby.configuration.ThumbyConfiguration;
+import de.hbznrw.thumby.configuration.DevelopmentConfiguration;
 import de.hbznrw.thumby.helper.ThumbnailGenerator;
 import de.hbznrw.thumby.helper.URLUtil;
 import de.hbznrw.thumby.model.TypedInputStream;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Jan Schnasse & Alessio Pellerito
  */
 @Service
+@Slf4j
 public class ThumbyService {
-    
-    private static final Logger log = LoggerFactory.getLogger(ThumbyService.class);
 	
 	@Autowired
-	private ThumbyConfiguration conf;
+	private DevelopmentConfiguration conf;
 	
 	@Autowired
 	private URLUtil urlUtil;

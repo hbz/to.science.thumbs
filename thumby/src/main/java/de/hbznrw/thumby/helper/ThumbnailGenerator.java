@@ -34,26 +34,24 @@ import org.apache.pdfbox.pdmodel.PageMode;
 import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.imgscalr.Scalr;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.common.io.Files;
 import com.google.common.net.MediaType;
 
-import de.hbznrw.thumby.configuration.ThumbyConfiguration;
+import de.hbznrw.thumby.configuration.DevelopmentConfiguration;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Jan Schnasse & Alessio Pellerito
  */
 @Component
+@Slf4j
 public class ThumbnailGenerator {
 	
 	@Autowired
-	private ThumbyConfiguration conf;
-	
-	private static final Logger log = LoggerFactory.getLogger(ThumbyConfiguration.class);
+	private DevelopmentConfiguration conf;
 	
     /**
      * @param ts

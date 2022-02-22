@@ -28,6 +28,9 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @SpringBootApplication
 public class ThumbyApplication extends SpringBootServletInitializer {
 
+	/**
+	 * Method is only necessary when deploying as war on external tomcat server 
+	 */
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return builder.sources(ThumbyApplication.class);

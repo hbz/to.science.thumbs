@@ -15,18 +15,35 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package de.hbznrw.thumby.model;
+package de.hbznrw.thumby.configuration;
 
-import java.io.InputStream;
+import java.util.List;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Profile;
+import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Component;
 
 import lombok.Data;
 
 /**
  * @author Jan Schnasse & Alessio Pellerito
  */
+@Component
+@Profile("development")
+@ConfigurationProperties(prefix = "thumby")
 @Data
-public class TypedInputStream {
-	private InputStream in;
-	private String type;
+public class DevelopmentConfiguration {
 	
+	// the values comes from application.properties in classpath
+	private String storageLocation;
+	private List<String> whiteList; 
+	private Resource pathToDefaultPic;
+	private Resource pathToPdfPic;
+	private Resource pathToZipPic;
+	private Resource pathToVideoPic;
+	private Resource pathToTextPic;
+	private Resource pathToImagePic;
+	private Resource pathToAudioPic;
+
 }

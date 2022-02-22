@@ -22,28 +22,26 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.zip.CRC32;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.google.common.io.Files;
 
-import de.hbznrw.thumby.configuration.ThumbyConfiguration;
+import de.hbznrw.thumby.configuration.DevelopmentConfiguration;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Jan Schnasse & Alessio Pellerito
  */
 @Component
+@Slf4j
 public class Storage {
 	
-	private static final Logger log = LoggerFactory.getLogger(Storage.class);
-	
-	private ThumbyConfiguration conf;
+	private DevelopmentConfiguration conf;
 	
 	private static final long partitions = 100;
 	
 	@Autowired
-	public Storage(ThumbyConfiguration conf) {
+	public Storage(DevelopmentConfiguration conf) {
 		this.conf = conf;
 		log.info("Store content in: " + conf.getStorageLocation());
         for(int i = 0; i <= partitions; i++) {
