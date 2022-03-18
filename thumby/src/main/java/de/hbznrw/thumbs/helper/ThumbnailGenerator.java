@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package de.hbznrw.thumby.helper;
+package de.hbznrw.thumbs.helper;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -40,7 +40,7 @@ import org.springframework.stereotype.Component;
 import com.google.common.io.Files;
 import com.google.common.net.MediaType;
 
-import de.hbznrw.thumby.configuration.DevelopmentConfiguration;
+import de.hbznrw.thumbs.configuration.ConfigProperties;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -51,7 +51,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ThumbnailGenerator {
 	
 	@Autowired
-	private DevelopmentConfiguration conf;
+	private ConfigProperties conf;
 	
     /**
      * @param ts

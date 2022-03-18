@@ -3,11 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>de.hbz-nrw</groupId>
-	<artifactId>thumby</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<groupId>de.hbznrw</groupId>
+	<artifactId>thumbs</artifactId>
+	<version>0.0.2</version>
 	<packaging>war</packaging>
-	<name>thumby</name>
+	<name>thumbs</name>
 	<description>Thumnailgenerator for hbz cologne</description>
 	
 	<parent>
@@ -116,8 +116,8 @@
 	</dependencies>
 
 	<build>
-	    <!-- Name of the war file, currently it will produce thumby.war -->
-		<finalName>thumby</finalName>
+	    <!-- Name of the war file, currently it will produce thumbs.war -->
+		<finalName>thumbs</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

@@ -15,29 +15,33 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package de.hbznrw.thumby.configuration;
+package de.hbznrw.thumbs.configuration;
 
 import java.util.List;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.io.Resource;
-import org.springframework.stereotype.Component;
-
 import lombok.Data;
 
 /**
  * @author Jan Schnasse & Alessio Pellerito
  */
-@Component
-@Profile("production")
-@PropertySource("file:/etc/thumby.properties")
-@ConfigurationProperties(prefix = "thumby")
+@Configuration
+@PropertySources({
+    @PropertySource(value = "classpath:application-dev.properties"),
+    @PropertySource(value = "file:/etc/thumbs/application.properties", ignoreResourceNotFound = true)
+})
+@ConfigurationProperties(prefix = "thumbs")
 @Data
-public class ProductionConfiguration {
+public class ConfigProperties {
 	
-	// the values comes from external thumby.properties file
+	/**
+	 * Values comes first from external /etc/thumbs/application.properties (usable in production), 
+	 * if it does not exist then from internal application-dev.properties (usable in development/local)
+	 */
 	private String storageLocation;
 	private List<String> whiteList; 
 	private Resource pathToDefaultPic;

@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package de.hbznrw.thumby.helper;
+package de.hbznrw.thumbs.helper;
 
 import java.net.URI;
 import java.net.URL;
@@ -29,7 +29,7 @@ import java.nio.charset.StandardCharsets;
 
 import org.springframework.stereotype.Component;
 
-import de.hbznrw.thumby.model.TypedInputStream;
+import de.hbznrw.thumbs.model.TypedInputStream;
 import lombok.extern.slf4j.Slf4j;
 
 /**

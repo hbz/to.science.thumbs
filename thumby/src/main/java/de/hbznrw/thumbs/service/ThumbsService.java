@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package de.hbznrw.thumby.service;
+package de.hbznrw.thumbs.service;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,10 +26,10 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.net.MediaType;
 
-import de.hbznrw.thumby.configuration.DevelopmentConfiguration;
-import de.hbznrw.thumby.helper.ThumbnailGenerator;
-import de.hbznrw.thumby.helper.URLUtil;
-import de.hbznrw.thumby.model.TypedInputStream;
+import de.hbznrw.thumbs.configuration.ConfigProperties;
+import de.hbznrw.thumbs.helper.ThumbnailGenerator;
+import de.hbznrw.thumbs.helper.URLUtil;
+import de.hbznrw.thumbs.model.TypedInputStream;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -37,10 +37,10 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Service
 @Slf4j
-public class ThumbyService {
+public class ThumbsService {
 	
 	@Autowired
-	private DevelopmentConfiguration conf;
+	private ConfigProperties conf;
 	
 	@Autowired
 	private URLUtil urlUtil;

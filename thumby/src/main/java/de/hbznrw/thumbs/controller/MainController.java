@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package de.hbznrw.thumby.controller;
+package de.hbznrw.thumbs.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,8 +30,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import de.hbznrw.thumby.model.Storage;
-import de.hbznrw.thumby.service.ThumbyService;
+
+import de.hbznrw.thumbs.model.Storage;
+import de.hbznrw.thumbs.service.ThumbsService;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -45,7 +46,7 @@ public class MainController {
 	private Storage storage;
 	
 	@Autowired
-	private ThumbyService service;
+	private ThumbsService service;
 	
 	@GetMapping(value="/",produces = {MediaType.IMAGE_JPEG_VALUE,MediaType.TEXT_HTML_VALUE, MediaType.APPLICATION_JSON_VALUE})
 	public CompletableFuture<Object> getThumbnail( @RequestParam(required=false) String url, 
@@ -61,7 +62,7 @@ public class MainController {
 					log.info("URLHost: " + urlAdress.getHost());
 					return ResponseEntity.status(HttpStatus.FORBIDDEN)
 										 .contentType(MediaType.APPLICATION_JSON)
-										 .body("Thumby is not allowed to access this url!");
+										 .body("Thumbs is not allowed to access this url!");
 				}
 				File result = (File) storage.get(urlAdress.toString() + size);
 				if(refresh == 1 && result != null) { 

@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package de.hbznrw.thumby;
+package de.hbznrw.thumbs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,18 +26,18 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  * @author Jan Schnasse & Alessio Pellerito
  */
 @SpringBootApplication
-public class ThumbyApplication extends SpringBootServletInitializer {
+public class ThumbsApplication extends SpringBootServletInitializer {
 
 	/**
-	 * Method is only necessary when deploying as war on external tomcat server 
+	 * Method is only necessary for deploying as war file on external tomcat server 
 	 */
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(ThumbyApplication.class);
+		return builder.sources(ThumbsApplication.class);
 	}
 	
 	public static void main(String[] args) {
-		SpringApplication.run(ThumbyApplication.class, args);
+		SpringApplication.run(ThumbsApplication.class, args);
 	}
 
 }

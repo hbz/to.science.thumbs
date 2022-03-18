@@ -1,4 +1,4 @@
-package de.hbznrw.thumby;
+package de.hbznrw.thumbs;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -9,9 +9,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import de.hbznrw.thumby.controller.MainController;
-import de.hbznrw.thumby.model.Storage;
-import de.hbznrw.thumby.service.ThumbyService;
+import de.hbznrw.thumbs.controller.MainController;
+import de.hbznrw.thumbs.model.Storage;
+import de.hbznrw.thumbs.service.ThumbsService;
 
 /**
 *
@@ -27,7 +27,7 @@ public class MainControllerIntegrationTest {
 	private MockMvc mockMvc;
 	
 	@MockBean
-	private ThumbyService thumbyService;
+	private ThumbsService thumbyService;
 	
 	@MockBean
 	private Storage storage;

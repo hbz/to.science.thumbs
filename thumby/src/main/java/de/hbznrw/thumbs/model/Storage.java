@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package de.hbznrw.thumby.model;
+package de.hbznrw.thumbs.model;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.google.common.io.Files;
 
-import de.hbznrw.thumby.configuration.DevelopmentConfiguration;
+import de.hbznrw.thumbs.configuration.ConfigProperties;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -36,12 +36,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Storage {
 	
-	private DevelopmentConfiguration conf;
+	private ConfigProperties conf;
 	
 	private static final long partitions = 100;
 	
 	@Autowired
-	public Storage(DevelopmentConfiguration conf) {
+	public Storage(ConfigProperties conf) {
 		this.conf = conf;
 		log.info("Store content in: " + conf.getStorageLocation());
         for(int i = 0; i <= partitions; i++) {

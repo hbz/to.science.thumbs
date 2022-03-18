@@ -1,4 +1,4 @@
-package de.hbznrw.thumby;
+package de.hbznrw.thumbs;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,7 +15,7 @@ import com.google.common.hash.Hashing;
 import com.google.common.io.Files;
 import com.google.common.net.MediaType;
 
-import de.hbznrw.thumby.service.ThumbyService;
+import de.hbznrw.thumbs.service.ThumbsService;
 
 /**
 *
@@ -32,7 +32,7 @@ class ThumbyApplicationUnitTest {
 	private static final Logger log = LoggerFactory.getLogger(ThumbyApplicationUnitTest.class);
 	
 	@Autowired
-	ThumbyService thumbyService;
+	ThumbsService thumbyService;
 	
 	@Test
 	void getThumbnailUnitTest() 
