@@ -39,8 +39,9 @@ import lombok.Data;
 public class ConfigProperties {
 	
 	/**
-	 * Values comes first from external /etc/thumbs/application.properties (usable in production), 
-	 * if it does not exist then from internal application-dev.properties (usable in development/local)
+	 * In production the values comes from external /etc/thumbs/application.properties, 
+	 * in development status (and if above external file does not exist) they comes 
+	 * from internal application-dev.properties
 	 */
 	private String storageLocation;
 	private List<String> whiteList; 
