@@ -1,0 +1,9 @@
+de/hbznrw/thumbs/service/ThumbsService.class
+de/hbznrw/thumbs/helper/ThumbnailGenerator.class
+META-INF/spring-configuration-metadata.json
+de/hbznrw/thumbs/helper/URLUtil.class
+de/hbznrw/thumbs/configuration/ConfigProperties.class
+de/hbznrw/thumbs/model/Storage.class
+de/hbznrw/thumbs/model/TypedInputStream.class
+de/hbznrw/thumbs/controller/MainController.class
+de/hbznrw/thumbs/ThumbsApplication.class
