@@ -31,14 +31,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<!-- remove this exclusion to use the embedded server, i.e. in dev mode -->
 			<exclusions>
 		      <exclusion>
 		         <groupId>org.springframework.boot</groupId>
 		         <artifactId>spring-boot-starter-tomcat</artifactId>
 		      </exclusion>
 		   </exclusions>
-		   <!-- remove this exclusion to use the embedded server END-->
 		</dependency>
 		
 		<dependency>
@@ -122,7 +120,7 @@
 
 	<build>
 	    <!-- Name of the war file, currently it will produce thumbs.war -->
-		<finalName>thumbs</finalName>
+		<finalName>thumbs-${project.version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
