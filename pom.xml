@@ -120,7 +120,7 @@
 
 	<build>
 	    <!-- Name of the war file, currently it will produce thumbs.war -->
-		<finalName>thumbs-${project.version}</finalName>
+		<finalName>thumbs</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
