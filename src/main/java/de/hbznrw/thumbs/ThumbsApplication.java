@@ -28,17 +28,16 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @SpringBootApplication
 public class ThumbsApplication extends SpringBootServletInitializer {
 	
-	public static void main(String[] args) {
-		SpringApplication.run(ThumbsApplication.class, args);
-	}
-	
-	
 	/**
 	 * Method is only necessary for deploying as war file on external tomcat server 
 	 */
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return builder.sources(ThumbsApplication.class);
+	}
+	
+	public static void main(String[] args) {
+		SpringApplication.run(ThumbsApplication.class, args);
 	}
 
 }

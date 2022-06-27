@@ -26,6 +26,7 @@ import lombok.Data;
  */
 @Data
 public class TypedInputStream {
+	
 	private InputStream in;
 	private String type;
 	

@@ -40,7 +40,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 public class MainController {
-	
+
 	@Autowired
 	private Storage storage;
 	
@@ -51,38 +51,34 @@ public class MainController {
 	public Object getThumbnail( @RequestParam(required=false) String url, 
 								@RequestParam(defaultValue="150") Integer size,
 								@RequestParam(defaultValue="0") Integer refresh ) {
-		try {	
-			if(url == null || url.isEmpty()) 
-				return (String) "upload";
-
-			URL urlAdress = new URL(url);
+			try {	
+				if(url == null || url.isEmpty()) { 
+					return (String) "upload";
+				}
+				URL urlAdress = new URL(url);
+				if(!service.isWhitelisted(urlAdress.getHost())) {
+					log.info("URLHost: " + urlAdress.getHost());
+					return ResponseEntity.status(HttpStatus.FORBIDDEN)
+										 .contentType(MediaType.APPLICATION_JSON)
+										 .body("Thumby is not allowed to access this url!");
+				}
+				File result = (File) storage.get(urlAdress.toString() + size);
+				if(refresh == 1 && result != null) { 
+					result.delete();
+					result = null;
+				}
+				if(result == null) {	
+					result = service.uploadUrl(urlAdress, size);
+					storage.set(urlAdress.toString() + size, result);
+				}	
+				return ResponseEntity.status(HttpStatus.OK)
+						             .contentType(MediaType.IMAGE_JPEG)
+						             .body(Files.readAllBytes(result.toPath()));
 			
-			if(!service.isWhitelisted(urlAdress.getHost())) {
-				log.info("URLHost: " + urlAdress.getHost());
-				return ResponseEntity.status(HttpStatus.FORBIDDEN)
-									 .contentType(MediaType.APPLICATION_JSON)
-									 .body("Thumbs is not allowed to access this url!");
-			}
+			} catch(IOException e) {
+				return ResponseEntity.internalServerError().body(e.toString());
+			}			
 			
-			File result = (File) storage.get(urlAdress.toString() + size);
-			
-			if(refresh == 1 && result != null) { 
-				result.delete();
-				result = null;
-			}
-			
-			if(result == null) {	
-				result = service.uploadUrl(urlAdress, size);
-				storage.set(urlAdress.toString() + size, result);
-			}
-			
-			return ResponseEntity.status(HttpStatus.OK)
-					             .contentType(MediaType.IMAGE_JPEG)
-					             .body(Files.readAllBytes(result.toPath()));
-		
-		} catch(IOException e) {
-			return ResponseEntity.internalServerError().body(e.toString());
-		}			
 			
 	}
 

@@ -29,7 +29,7 @@ import lombok.Data;
  * @author Jan Schnasse & Alessio Pellerito
  */
 @Configuration
-@PropertySource(value = "file:/etc/thumbs/application.properties", ignoreResourceNotFound = true)
+@PropertySource("file:/etc/thumbs/application.properties")
 @ConfigurationProperties(prefix = "thumbs")
 @Data
 public class ThumbsProperties {
@@ -43,5 +43,5 @@ public class ThumbsProperties {
 	private Resource pathToTextPic;
 	private Resource pathToImagePic;
 	private Resource pathToAudioPic;
-
+	
 }

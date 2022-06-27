@@ -36,13 +36,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Storage {
 	
-	private ThumbsProperties conf;
+	private ThumbsProperties props;
 	
 	private static final long partitions = 100;
 	
 	@Autowired
 	public Storage(ThumbsProperties conf) {
-		this.conf = conf;
+		this.props = conf;
 		log.info("Store content in: " + conf.getStorageLocation());
         for(int i = 0; i <= partitions; i++) {
             new File(conf.getStorageLocation() + File.separator + i).mkdirs(); 
@@ -71,7 +71,7 @@ public class Storage {
     private File findTarget(String key) {
         String name = encode(key);
         String dirname = getDirName(name);
-        return new File(conf.getStorageLocation() + File.separator + dirname + File.separator + name);
+        return new File(props.getStorageLocation() + File.separator + dirname + File.separator + name);
     }
 
     private String getDirName(String name) {

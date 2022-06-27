@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>de.hbznrw</groupId>
+	<groupId>de.hbz-nrw</groupId>
 	<artifactId>thumbs</artifactId>
 	<version>0.0.2</version>
 	<packaging>war</packaging>
@@ -31,19 +31,15 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<exclusions>
-		      <exclusion>
-		         <groupId>org.springframework.boot</groupId>
-		         <artifactId>spring-boot-starter-tomcat</artifactId>
-		      </exclusion>
-		   </exclusions>
 		</dependency>
 		
+		<!-- Dependency added for deploying in other server -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<!-- Dependency added for deploying in other server END-->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
